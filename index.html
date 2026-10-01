@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Tran | Engineering Portfolio[cite: 1]</title>
+    <style>
+        /* Dark Theme Variables */
+        :root {
+            --bg-main: #060B14;       
+            --bg-sidebar: #0A1220;    
+            --card-bg: #111A2C;       
+            --text-main: #E0E6ED;     
+            --text-muted: #8B9BB4;    
+            --accent-blue: #4DA8DA;   
+            --border-color: #1E2D4A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Top Sticky Navigation */
+        header {
+            background-color: var(--bg-sidebar);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 5%;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .header-brand h1 {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .header-brand p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Main Content Area */
+        main {
+            padding: 4rem 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Intro Header Styling */
+        .intro-header h2 {
+            border: none;
+            font-size: 2.5rem;
+            margin-bottom: 0.25rem;
+            padding-bottom: 0;
+        }
+        
+        .intro-details {
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .intro-details a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .intro-details a:hover {
+            opacity: 0.7;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-box {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-box h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Experience & Projects Block Formatting */
+        .experience-block {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-header h3 {
+            color: #FFFFFF;
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .experience-date {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .experience-company {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .experience-block ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-block li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Image Hover Reveal Container */
+        .project-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            height: 300px; 
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .project-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        /* Image Zoom on Hover */
+        .project-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Fade-in Caption Styling */
+        .image-caption {
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 11, 20, 0.85); 
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Reveal Caption on Hover */
+        .project-image-wrapper:hover .image-caption {
+            opacity: 1;
+        }
+        
+        /* Document Embed Rows */
+        .document-row {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .document-item {
+            flex: 0 0 350px;
+            background-color: #0A1220;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .document-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Resume Section */
+        .resume-container {
+            width: 100%;
+            height: 700px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Sticky Navigation -->
+    <header>
+        <div class="header-brand">
+            <h1>Andrew Tran[cite: 1]</h1>
+            <p>Undergraduate Aerospace Engineer[cite: 1]</p>
+        </div>
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Leadership & Involvement</a>
+            <a href="#projects">Projects</a>
+            <a href="#resume">Resume</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Consolidated Introduction Section -->
+        <section id="about" class="intro-header">
+            <h2>Andrew Tran[cite: 1]</h2>
+            <div class="intro-details">
+                <span>727-900-4564[cite: 1]</span> &nbsp;|&nbsp; 
+                <a href="mailto:andrewt675@outlook.com">andrewt675@outlook.com[cite: 1]</a> &nbsp;|&nbsp; 
+                <a href="https://www.linkedin.com/in/andrew-tran-525a7a2b2/" target="_blank">LinkedIn[cite: 1]</a>
+            </div>
+            <p>I am an undergraduate student studying aerospace at the University of Central Florida[cite: 2]. I am an F-LEARN Research Scholar[cite: 1] and an active member of Knights Experimental Rocketry (KXR), Knights Satellite Club (KSC), and the American Institute of Aeronautics and Astronautics (AIAA) at UCF[cite: 1]. I enjoy applying concepts learned in the classroom into the real world with real conditions to build the foundations of my engineering career[cite: 2].</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <!-- Skill Box 1 -->
+                <div class="skill-box">
+                    <h3>Design Software[cite: 1]</h3>
+                    <ul class="skill-list">
+                        <li>SolidWorks[cite: 1]</li>
+                        <li>Autodesk Fusion[cite: 1]</li>
+                        <li>Onshape[cite: 1]</li>
+                        <li>Rhino 3D/Grasshopper[cite: 1]</li>
+                    </ul>
+                </div>
+                <!-- Skill Box 2 -->
+                <div class="skill-box">
+                    <h3>Coding & Analysis[cite: 1]</h3>
+                    <ul class="skill-list">
+                        <li>Java, Python, C++, C[cite: 1]</li>
+                        <li>MATLAB[cite: 1]</li>
+                        <li>OpenRocket & OpenHD[cite: 1]</li>
+                        <li>Free Flyer[cite: 1]</li>
+                    </ul>
+                </div>
+                <!-- Skill Box 3 -->
+                <div class="skill-box">
+                    <h3>Core Competencies[cite: 1]</h3>
+                    <ul class="skill-list">
+                        <li>3D modelling & simulations[cite: 1]</li>
+                        <li>Data analysis & prompt engineering[cite: 1]</li>
+                        <li>Soldering[cite: 1]</li>
+                        <li>Technical documentation[cite: 1]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Leadership Experience & Involvement[cite: 1]</h2>
+            
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>Fundraising Committee Chair[cite: 1]</h3>
+                    <span class="experience-date">May 2026 - Present[cite: 1]</span>
+                </div>
+                <div class="experience-company">Knights Satellite Club (KSC)[cite: 1]</div>
+                <ul>
+                    <li>Currently serving as fundraising chair for KSC[cite: 1].</li>
+                    <li>Helping raise more than $1000 for projects and events through volunteering, outreach, and writing and proposing grants/bills to UCF Student Government and STEM-oriented organizations[cite: 1].</li>
+                    <li>In charge of budgeting and ordering supplies for the current TSAT-3A and TSAT-3B projects[cite: 1].</li>
+                </ul>
+            </div>
+
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>Undergraduate Researcher - Software/AI Side[cite: 1]</h3>
+                    <span class="experience-date">Nov 2025 - Present[cite: 1]</span>
+                </div>
+                <div class="experience-company">Knight3D[cite: 1]</div>
+                <ul>
+                    <li>Utilized parametric modelling software, Rhino and Grasshopper, to design and produce houses and structures with given floor plans[cite: 1].</li>
+                    <li>Integrated AI to assist with parametric modeling[cite: 1].</li>
+                    <li>The end goal is to be able to enter prompts into the AI to generate 3D structures given the same or different dimensions from the floor plan[cite: 1].</li>
+                </ul>
+            </div>
+            
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>Staff Member - International Program[cite: 1]</h3>
+                    <span class="experience-date">Dec 2025 - Present[cite: 1]</span>
+                </div>
+                <div class="experience-company">UCF-GNU Space Camp[cite: 1]</div>
+                <ul>
+                    <li>Organized and helped plan a week-long program during the winter and summer involving 15+ international undergraduates studying aerospace from Gyeongsang National University[cite: 1].</li>
+                    <li>Provided an immersive experience of UCF and the greater Orlando area for what it offers for aerospace in both industry and technological advancement[cite: 1].</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            
+            <!-- New Statics and Dynamics Box -->
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>Statics and Dynamics[cite: 2]</h3>
+                    <span class="experience-date">Class Projects[cite: 2]</span>
+                </div>
+                <p>In the classroom, my professors from both my statics and dynamics classes, Dr. Zaurin and Dr. Pal respectively, assigned me and my classmates hands-on projects to reinforce important topics taught throughout the course[cite: 2]. All of them involved producing and/or testing a real model, gathering results and data, calculating the model on paper, and then comparing results[cite: 2]. Through these projects, my colleagues and I were able to apply concepts learned in the classroom into the real world with real conditions[cite: 2]. Ultimately, we were able to gain a deeper understanding of what we were learning in what would be the foundations of our engineering careers[cite: 2]. Below are attached the documentation of the hands-on projects I was assigned, alongside the pictures, calculations, graphs, and conclusions of each[cite: 2].</p>
+                
+                <!-- Placeholder for future photos -->
+                <div class="project-image-wrapper">
+                    <img src="https://via.placeholder.com/1000x300/111A2C/4DA8DA?text=Project+Images+Here" alt="Project Documentation">
+                    <div class="image-caption">Hands-on testing and analytical comparisons.</div>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Statics (Hands-On Projects)</h4>
+                <div class="document-row">
+                    <div class="document-item">
+                        <p>Non-parallel Axis[cite: 5]</p>
+                        <embed src="Hands-On-HW 1 (Non parallel Axis).docx" width="100%" height="300px" />
+                    </div>
+                    <div class="document-item">
+                        <p>Particle Equilibriums-Springs[cite: 4]</p>
+                        <embed src="Hands on Homework #2 (Particle Equilibriums-Springs).docx" width="100%" height="300px" />
+                    </div>
+                    <div class="document-item">
+                        <p>3D Particle Equilibrium[cite: 6]</p>
+                        <embed src="Hands on Homework #3 (3D Particle Equilibrium).docx" width="100%" height="300px" />
+                    </div>
+                    <div class="document-item">
+                        <p>Equivalent Systems 3D[cite: 7]</p>
+                        <embed src="Hands on Homework #4 (Equivalent Systems 3D).docx" width="100%" height="300px" />
+                    </div>
+                    <div class="document-item">
+                        <p>Crane Equilibrium[cite: 8]</p>
+                        <embed src="Hands on Homework #5 (Crane Equilibrium).docx" width="100%" height="300px" />
+                    </div>
+                    <div class="document-item">
+                        <p>Truss[cite: 9]</p>
+                        <embed src="Hands on Homework #6 (Truss).docx" width="100%" height="300px" />
+                    </div>
+                    <div class="document-item">
+                        <p>Center of Gravity[cite: 10]</p>
+                        <embed src="Hands on Homework #7(Center of gravity).docx" width="100%" height="300px" />
+                    </div>
+                </div>
+
+                <h4 style="color: var(--accent-blue); margin-top: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Dynamics (Mini Projects)</h4>
+                <div class="document-row">
+                    <div class="document-item">
+                        <p>Projectile Motion[cite: 11]</p>
+                        <embed src="Mini Project Report 1 –Projectile Motion.docx" width="100%" height="300px" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>TSAT-2B (Tethered CubeSat)[cite: 1]</h3>
+                    <span class="experience-date">Tools: SolidWorks, OpenHD[cite: 1]</span>
+                </div>
+                <div class="experience-company">Knights Satellite Club[cite: 1]</div>
+                <ul>
+                    <li>Designed and assembled a CubeSat with an emphasis on avionics and software[cite: 1].</li>
+                    <li>Focused on live telemetry (data such as temperature, altitude, velocity, and acceleration) as well as live video using OpenHD[cite: 1].</li>
+                    <li>3D modeled the frame of the CubeSat with SolidWorks, prototyping different parachute designs[cite: 1].</li>
+                    <li>Assigned to work on risk mitigation and assessment such as checking weather, launch environment, and reviewing safety concerns[cite: 1].</li>
+                    <li>Assisted in the launch of the CubeSat, which was tethered to a weather balloon and released up to 500 ft off the ground[cite: 1].</li>
+                </ul>
+            </div>
+
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>L1 High Powered Rocketry[cite: 1]</h3>
+                    <span class="experience-date">Tools: SolidWorks Simulations[cite: 1]</span>
+                </div>
+                <div class="experience-company">Knights Experimental Rocketry (KXR)[cite: 1]</div>
+                <ul>
+                    <li>Designed and assembled an L1 rocket under a $140 budget to reach 2200+ ft[cite: 1].</li>
+                    <li>Used SolidWorks Simulations to simulate flight dynamics of the rocket[cite: 1].</li>
+                    <li>This project involves high-powered rocketry that can fly upwards of 2000+ feet depending on the design of the rocket as well as motor type[cite: 2].</li>
+                </ul>
+            </div>
+
+            <div class="experience-block">
+                <div class="experience-header">
+                    <h3>Quadcopter[cite: 2]</h3>
+                    <span class="experience-date">Tools: SolidWorks, Electronics[cite: 2]</span>
+                </div>
+                <div class="experience-company">AIAA UCF Chapter[cite: 2]</div>
+                <ul>
+                    <li>Participated in a freshman-level project designed to introduce students to engineering and what it was like to design, manufacture, assemble, and test the final product[cite: 2].</li>
+                    <li>Learned about CADing using SolidWorks and the electronics that goes into making a quadcopter work[cite: 2].</li>
+                    <li>Documented lessons learned, noting that due to the short wingspan and large battery, the drone was very top heavy, extremely unstable, and could not fly for long periods of time[cite: 2].</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume">
+            <h2>Resume</h2>
+            <p>You can view my full resume below, or <a href="ResumeV3.pdf" target="_blank" style="color: var(--accent-blue);">download it here[cite: 1]</a>.</p>
+            <div class="resume-container">
+                <embed src="ResumeV3.pdf" type="application/pdf" width="100%" height="100%" />
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Andrew Tran[cite: 1]. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
